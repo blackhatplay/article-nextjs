@@ -1,6 +1,7 @@
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 import server from "../api/server";
+import axios from "axios";
 import ArticleRenderer from "../components/ArticleRenderer";
 import Layout from "../components/Layout";
 
@@ -11,8 +12,8 @@ const Post = ({ data }) => {
 
   if (!data) {
     useEffect(() => {
-      server
-        .get(`/post/${query}`)
+      axios
+        .get(`${process.env.NEXT_PUBLIC_SERVER}/post/${query}`)
         .then((res) => {
           if (Object.keys(res.data).length > 0) {
             setState(res.data);
