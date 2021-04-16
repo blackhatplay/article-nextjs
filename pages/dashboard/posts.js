@@ -15,7 +15,7 @@ import {
 import SideBar from "../../components/SideBar";
 import InfoCard from "../../components/InfoCard";
 import ToFollow from "../../components/ToFollow";
-import DashboardPostList from "../../components/dashboardPostList";
+import DashboardPostList from "../../components/DashboardPostList";
 
 const useStyles = makeStyles((theme) => ({
   sideBarList: {
