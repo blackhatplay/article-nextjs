@@ -11,11 +11,14 @@ const Post = ({ data }) => {
 
   if (!data) {
     useEffect(() => {
-      server.get(`/post/${query}`).then((res) => {
-        if (Object.keys(res.data).length > 0) {
-          setState(res.data);
-        }
-      });
+      server
+        .get(`/post/${query}`)
+        .then((res) => {
+          if (Object.keys(res.data).length > 0) {
+            setState(res.data);
+          }
+        })
+        .catch((err) => console.log(err));
     }, [query]);
   }
 
