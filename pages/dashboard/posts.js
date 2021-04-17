@@ -3,7 +3,10 @@ import Layout from "../../components/Layout";
 import customServerAuth from "../../utils/customServerAuth";
 import { useRouter } from "next/router";
 import { connect } from "react-redux";
-import { fetchUserPosts } from "../../redux/actions/dashboardActions";
+import {
+  fetchUserPosts,
+  fetchUserPostsOnServer,
+} from "../../redux/actions/dashboardActions";
 import { useEffect } from "react";
 import {
   Box,
@@ -21,18 +24,18 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const posts = ({ isLoggedIn, userPosts, fetchUserPosts }) => {
+const posts = ({ isLoggedIn, userPosts, user }) => {
   const classes = useStyles();
   const hasWindow = typeof window !== "undefined";
   const router = useRouter();
-  useEffect(() => {
-    if (isLoggedIn) {
-      fetchUserPosts();
-    }
-  }, [isLoggedIn]);
+  // useEffect(() => {
+  //   if (isLoggedIn) {
+  //     fetchUserPosts();
+  //   }
+  // }, [isLoggedIn]);
 
   return (
-    <Layout>
+    <Layout user={user} isLoggedIn={isLoggedIn}>
       <Container maxWidth="lg">
         <Grid container spacing={5}>
           <Grid item md={8}>
@@ -57,7 +60,7 @@ const posts = ({ isLoggedIn, userPosts, fetchUserPosts }) => {
 };
 
 export async function getServerSideProps(context) {
-  const { auth, user } = customServerAuth(context, "/login");
+  const { auth, user, cookie } = customServerAuth(context, "/login");
 
   if (!auth) {
     return {
@@ -67,10 +70,14 @@ export async function getServerSideProps(context) {
       },
     };
   } else {
+    const posts = await fetchUserPostsOnServer(cookie);
+
+    const userPosts = await posts.data;
     return {
       props: {
         isLoggedIn: true,
         user,
+        userPosts,
       },
     };
   }
@@ -78,10 +85,9 @@ export async function getServerSideProps(context) {
 
 const mapStateToProps = (state) => {
   return {
-    userPosts: state.dashboard.userPosts,
     isLoggedIn: state.user.isLoggedIn,
     user: state.user,
   };
 };
 
-export default connect(mapStateToProps, { fetchUserPosts })(posts);
+export default posts;

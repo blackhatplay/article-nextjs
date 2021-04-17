@@ -70,7 +70,7 @@ const useStyles = makeStyles((theme) => {
   };
 });
 
-const login = ({ isLoggedIn, user, loginAction }) => {
+const login = ({ isLoggedIn, user }) => {
   const [values, setValues] = useState({
     user: "",
     password: "",
@@ -110,6 +110,7 @@ const login = ({ isLoggedIn, user, loginAction }) => {
     loginAction(data)
       .then((token) => {
         setToken(token);
+        router.push("/dashboard");
       })
       .catch((err) => console.log(err));
   };
@@ -225,4 +226,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { loginAction })(login);
+export default login;

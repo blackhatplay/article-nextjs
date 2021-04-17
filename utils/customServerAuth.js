@@ -22,6 +22,7 @@ const serverAuth = (context, path) => {
       return {
         auth: true,
         user: decoded,
+        cookie,
       };
     }
   }

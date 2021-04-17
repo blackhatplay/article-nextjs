@@ -1,12 +1,12 @@
 import React from "react";
 import dynamic from "next/dynamic";
 import Layout from "../../components/Layout";
-import serverAuth from "../../utils/serverAuth";
+import customServerAuth from "../../utils/customServerAuth";
 import { connect } from "react-redux";
 import { useRouter } from "next/router";
 import { createUserPost } from "../../redux/actions/dashboardActions";
 
-const create = ({ isLoggedIn }) => {
+const create = ({ isLoggedIn, user }) => {
   const router = useRouter();
   const EditorJS = dynamic(() => import("../../components/Editor"), {
     ssr: false,
@@ -15,14 +15,29 @@ const create = ({ isLoggedIn }) => {
   const hasWindow = typeof window !== "undefined";
 
   return (
-    <Layout>
+    <Layout isLoggedIn={isLoggedIn} user={user}>
       <EditorJS action={createUserPost} />
     </Layout>
   );
 };
 
 export async function getServerSideProps(context) {
-  return serverAuth(context, "/login");
+  const { auth, user, cookie } = customServerAuth(context, "/login");
+  if (!auth) {
+    return {
+      redirect: {
+        destination: "/login",
+        permanent: false,
+      },
+    };
+  } else {
+    return {
+      props: {
+        isLoggedIn: true,
+        user,
+      },
+    };
+  }
 }
 
 const mapStateToProps = (state) => {
@@ -32,4 +47,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(create);
+export default create;

@@ -13,6 +13,19 @@ export const fetchUserPosts = () => (dispatch) => {
     .catch((err) => console.log(err));
 };
 
+export const fetchUserPostsOnServer = (cookie) => {
+  return server
+    .get(`${process.env.NEXT_PUBLIC_SERVER}/api/post/user`, {
+      headers: {
+        cookie: `articleStoken=${cookie}`,
+      },
+    })
+    .then((articles) => {
+      return articles;
+    })
+    .catch((err) => console.log(err));
+};
+
 export const delelteUserPost = (pid) => (dispatch) => {
   server
     .delete(`/post/${pid}`)

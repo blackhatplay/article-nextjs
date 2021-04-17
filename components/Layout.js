@@ -67,7 +67,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Layout = (props) => {
   const router = useRouter();
-  const { window, children, user, logout, isLoggedIn } = props;
+  const { window, children, user, isLoggedIn } = props;
   const classes = useStyles();
   const theme = useTheme();
   const [mobileOpen, setMobileOpen] = React.useState(false);
@@ -140,7 +140,12 @@ const Layout = (props) => {
 
   return (
     <div className={classes.root}>
-      <Header handleDrawerToggle={handleDrawerToggle} drawer />
+      <Header
+        handleDrawerToggle={handleDrawerToggle}
+        drawer
+        isLoggedIn={isLoggedIn}
+        user={user}
+      />
       <nav className={classes.drawer} aria-label="mailbox folders">
         {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
         <Hidden smUp implementation="css">
@@ -187,4 +192,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { logout })(Layout);
+export default Layout;

@@ -11,7 +11,6 @@ import classnames from "classnames";
 import { useRouter } from "next/router";
 
 const create = ({ data, action }) => {
-  console.log(data);
   const router = useRouter();
   const [state, setState] = useState({
     title: "",

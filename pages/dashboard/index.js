@@ -5,16 +5,16 @@ import { fetchArticles } from "../../redux/actions/articleActions";
 import { useEffect } from "react";
 import server from "../../api/server";
 import { wrapper, State } from "../../redux/store";
-import serverAuth from "../../utils/serverAuth";
+import customServerAuth from "../../utils/customServerAuth";
 import { useRouter } from "next/router";
 
-const index = ({ isLoggedIn, user, articles, fetchArticles }) => {
+const index = ({ isLoggedIn, user }) => {
   const router = useRouter();
 
   const hasWindow = typeof window !== "undefined";
 
   return (
-    <Layout>
+    <Layout user={user} isLoggedIn={isLoggedIn}>
       <div>
         <Head>
           <title>Dashboard</title>
@@ -26,7 +26,23 @@ const index = ({ isLoggedIn, user, articles, fetchArticles }) => {
 };
 
 export async function getServerSideProps(context) {
-  return serverAuth(context, "/login");
+  const { auth, user, cookie } = customServerAuth(context, "/login");
+
+  if (!auth) {
+    return {
+      redirect: {
+        destination: "/login",
+        permanent: false,
+      },
+    };
+  } else {
+    return {
+      props: {
+        isLoggedIn: true,
+        user,
+      },
+    };
+  }
 }
 
 const mapStateToProps = (state) => {
@@ -37,4 +53,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { fetchArticles })(index);
+export default index;

@@ -67,7 +67,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Header = ({ isLoggedIn, user, handleDrawerToggle, drawer, logout }) => {
+const Header = ({ isLoggedIn, user, handleDrawerToggle, drawer }) => {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
@@ -194,4 +194,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { logout })(Header);
+export default Header;

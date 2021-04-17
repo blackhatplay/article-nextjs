@@ -5,7 +5,7 @@ import { LOGIN_SUCCESS, LOGOUT } from "../types";
 import { parseCookies, setCookie, destroyCookie } from "nookies";
 import setAuthToken from "../../utils/setAuthToken";
 
-export const login = (data) => async (dispatch) => {
+export const login = async (data) => {
   try {
     const response = await server.post("/auth/login", {
       user: data.user,
@@ -18,16 +18,16 @@ export const login = (data) => async (dispatch) => {
     const token = user.token;
 
     if (token) {
-      const decoded = jwt_decode(token);
+      // const decoded = jwt_decode(token);
       // setCookie(null, "articleUtoken", token, {
       //   maxAge: 3600,
       //   path: "/",
       // });
       // setAuthToken(token);
-      dispatch({
-        type: LOGIN_SUCCESS,
-        payload: decoded,
-      });
+      // dispatch({
+      //   type: LOGIN_SUCCESS,
+      //   payload: decoded,
+      // });
       return token;
     }
 
@@ -37,7 +37,7 @@ export const login = (data) => async (dispatch) => {
   }
 };
 
-export const logout = (clear) => (dispatch) => {
+export const logout = (clear) => {
   clear("article-utoken");
   // setAuthToken();
   // destroyCookie(null, "articleUtoken", {
@@ -46,9 +46,9 @@ export const logout = (clear) => (dispatch) => {
   server
     .delete("/auth/clearCookie")
     .then((res) => {
-      dispatch({
-        type: LOGOUT,
-      });
+      // dispatch({
+      //   type: LOGOUT,
+      // });
     })
     .catch((err) => console.log(err));
 };

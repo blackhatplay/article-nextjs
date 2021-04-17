@@ -15,6 +15,7 @@ import Featured from "../components/Featured";
 import SideList from "../components/SideList";
 import MainList from "../components/MainList";
 import SideBar from "../components/SideBar";
+import customServerAuth from "../utils/customServerAuth";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -47,13 +48,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const index = () => {
+const index = ({ user, isLoggedIn }) => {
   const classes = useStyles();
   const router = useRouter();
 
   return (
     <div>
-      <Header />
+      <Header user={user} isLoggedIn={isLoggedIn} />
       <Container
         maxWidth="lg"
         // spacing={5}
@@ -83,5 +84,21 @@ const index = () => {
     </div>
   );
 };
+
+export async function getServerSideProps(context) {
+  const { auth, user, cookie } = customServerAuth(context, "/login");
+  if (!auth) {
+    return {
+      props: {},
+    };
+  } else {
+    return {
+      props: {
+        isLoggedIn: true,
+        user,
+      },
+    };
+  }
+}
 
 export default index;
