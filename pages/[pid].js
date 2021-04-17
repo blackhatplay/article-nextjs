@@ -63,7 +63,7 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params }) {
   try {
     const res = await server.get(
-      `http://localhost:4000/api/post/${params.pid}`
+      `${process.env.NEXT_PUBLIC_SERVER}/api/post/${params.pid}`
     );
 
     const data = await res.data;
