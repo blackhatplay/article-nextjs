@@ -12,9 +12,7 @@ import {
   makeStyles,
   Typography,
 } from "@material-ui/core";
-import SideBar from "../../components/SideBar";
 import InfoCard from "../../components/InfoCard";
-import ToFollow from "../../components/ToFollow";
 import DashboardPostList from "../../components/DashboardPostList";
 
 const useStyles = makeStyles((theme) => ({

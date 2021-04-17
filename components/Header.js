@@ -17,6 +17,7 @@ import { useState } from "react";
 import { logout } from "../redux/actions/authActions";
 import useLocalStorage from "../utils/useLocalStorage";
 import { useRouter } from "next/router";
+import { destroyCookie } from "nookies";
 
 const drawerWidth = 300;
 

@@ -22,16 +22,19 @@ function MyApp({ Component, pageProps }) {
 
   const store = useStore(pageProps.initialReduxState);
 
+  const hasWindow = typeof window !== "undefined";
+
   const [token, setToken, clearToken] = useLocalStorage("article-utoken");
+
   useEffect(() => {
-    if (token) {
+    if (token && hasWindow) {
       const decoded = jwt_decode(token);
       const currentTime = Date.now() / 1000;
       if (decoded.exp < currentTime) {
         store.dispatch(logout(clearToken));
-        window.location.href = "/login";
+        // window.location.href = "/login";
       } else {
-        setAuthToken(token);
+        // setAuthToken(token);
         store.dispatch({
           type: LOGIN_SUCCESS,
           payload: decoded,

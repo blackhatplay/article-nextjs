@@ -19,11 +19,11 @@ export const login = (data) => async (dispatch) => {
 
     if (token) {
       const decoded = jwt_decode(token);
-      setCookie(null, "articleUtoken", token, {
-        maxAge: 3600,
-        path: "/",
-      });
-      setAuthToken(token);
+      // setCookie(null, "articleUtoken", token, {
+      //   maxAge: 3600,
+      //   path: "/",
+      // });
+      // setAuthToken(token);
       dispatch({
         type: LOGIN_SUCCESS,
         payload: decoded,
@@ -37,11 +37,18 @@ export const login = (data) => async (dispatch) => {
   }
 };
 
-export const logout = (clear) => {
+export const logout = (clear) => (dispatch) => {
   clear("article-utoken");
-  setAuthToken();
-  destroyCookie(null, "articleUtoken");
-  return {
-    type: LOGOUT,
-  };
+  // setAuthToken();
+  // destroyCookie(null, "articleUtoken", {
+  //   path: "/",
+  // });
+  server
+    .delete("/auth/clearCookie")
+    .then((res) => {
+      dispatch({
+        type: LOGOUT,
+      });
+    })
+    .catch((err) => console.log(err));
 };

@@ -2,6 +2,7 @@ import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 import server from "../api/server";
 import ArticleRenderer from "../components/ArticleRenderer";
+import Header from "../components/Header";
 import Layout from "../components/Layout";
 
 const Post = ({ data }) => {
@@ -27,11 +28,18 @@ const Post = ({ data }) => {
     content = <h1 className="not-found">404 Not Found!</h1>;
   }
 
-  return content;
+  return (
+    <>
+      <Header />
+      {content}
+    </>
+  );
 };
 
 export async function getServerSideProps(context) {
-  const res = await server.get(`/post/${context.query.pid}`);
+  const res = await server.get(
+    `http://localhost:3000/api/post/${context.query.pid}`
+  );
 
   const data = res.data;
   return {

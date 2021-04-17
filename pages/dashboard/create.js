@@ -4,6 +4,7 @@ import Layout from "../../components/Layout";
 import serverAuth from "../../utils/serverAuth";
 import { connect } from "react-redux";
 import { useRouter } from "next/router";
+import { createUserPost } from "../../redux/actions/dashboardActions";
 
 const create = ({ isLoggedIn }) => {
   const router = useRouter();
@@ -15,7 +16,7 @@ const create = ({ isLoggedIn }) => {
 
   return (
     <Layout>
-      <EditorJS />
+      <EditorJS action={createUserPost} />
     </Layout>
   );
 };

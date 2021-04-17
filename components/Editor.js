@@ -10,7 +10,8 @@ import server, { serverURL } from "../api/server";
 import classnames from "classnames";
 import { useRouter } from "next/router";
 
-const create = () => {
+const create = ({ data, action }) => {
+  console.log(data);
   const router = useRouter();
   const [state, setState] = useState({
     title: "",
@@ -37,17 +38,19 @@ const create = () => {
           setErrors({});
         }
 
-        const newArticle = {
+        const article = {
           title: state.title,
           creator: state.creator,
-          data: JSON.stringify(outputData),
+          data: outputData,
         };
-        server
-          .post("/post", newArticle)
-          .then((res) => {
-            router.push(`/post/${res.data.urlId}`);
-          })
-          .catch((err) => console.log(err));
+
+        if (data) {
+          article.urlId = data.urlId;
+        }
+
+        console.log("toEdit", article);
+
+        action(article, router);
       })
       .catch((error) => {
         console.log("Saving failed: ", error);
@@ -56,10 +59,19 @@ const create = () => {
 
   const editor = useRef();
   useEffect(() => {
+    let article = {};
+    if (data) {
+      article = data.data;
+      setState({
+        title: data.title,
+        creator: data.creator,
+      });
+    }
     editor.current = new EditorJS({
       holder: "editorjs",
       minHeight: 10,
       placeholder: "Let`s write an awesome story!",
+      data: article,
       tools: {
         header: {
           class: Header,
@@ -73,6 +85,7 @@ const create = () => {
           class: Marker,
           shortcut: "CMD+SHIFT+M",
         },
+        // data: article,
         image: {
           class: ImageTool,
           config: {

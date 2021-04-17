@@ -5,7 +5,9 @@ const serverAuth = (context, path) => {
   const { req, res } = context;
   const cookies = nookies.get(context);
 
-  const token = cookies.articleUtoken;
+  const cookie = cookies.articleStoken;
+
+  const token = cookie && cookie.split(" ")[1];
 
   if (token) {
     const decoded = jwt_decode(token);
