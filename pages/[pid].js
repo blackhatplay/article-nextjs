@@ -38,7 +38,7 @@ const Post = ({ data }) => {
 
 export async function getServerSideProps(context) {
   const res = await server.get(
-    `http://localhost:3000/api/post/${context.query.pid}`
+    `${process.env.NEXT_PUBLIC_HOST}/api/post/${context.query.pid}`
   );
 
   const data = res.data;
