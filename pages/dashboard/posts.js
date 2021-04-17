@@ -34,6 +34,11 @@ const posts = ({ isLoggedIn, userPosts, user }) => {
   //   }
   // }, [isLoggedIn]);
 
+  const refreshData = () => {
+    console.log("re");
+    router.replace(router.asPath);
+  };
+
   return (
     <Layout user={user} isLoggedIn={isLoggedIn}>
       <Container maxWidth="lg">
@@ -42,7 +47,11 @@ const posts = ({ isLoggedIn, userPosts, user }) => {
             <Typography variant="h6">Your Published Posts</Typography>
             <Box>
               {userPosts.map((post) => (
-                <DashboardPostList key={post.urlId} post={post} />
+                <DashboardPostList
+                  key={post.urlId}
+                  post={post}
+                  refreshData={refreshData}
+                />
               ))}
             </Box>
           </Grid>

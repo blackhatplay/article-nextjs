@@ -8,14 +8,9 @@ import customServerAuth from "../utils/customServerAuth";
 
 const Post = ({ data, isLoggedIn, user }) => {
   const router = useRouter();
-  const query = router.query.pid;
-  const [state, setState] = useState({});
+  const pid = router.query.pid;
 
   let content = null;
-
-  if (router.isFallback) {
-    return <div>Loading...</div>;
-  }
 
   if (Object.keys(data).length > 0) {
     content = <ArticleRenderer article={data} />;
@@ -69,7 +64,7 @@ export async function getServerSideProps(context) {
 //   };
 // }
 
-// This also gets called at build time
+// // This also gets called at build time
 // export async function getStaticProps({ params }) {
 //   try {
 //     const res = await server.get(
@@ -81,9 +76,9 @@ export async function getServerSideProps(context) {
 //     // If the route is like /posts/1, then params.id is 1
 
 //     // Pass post data to the page via props
-//     return { props: { data } };
+//     return { props: { postData: data } };
 //   } catch (err) {
-//     return { props: { data: {} } };
+//     return { props: { postData: {} } };
 //   }
 // }
 

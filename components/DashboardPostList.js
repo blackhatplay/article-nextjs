@@ -15,7 +15,6 @@ import {
   Typography,
 } from "@material-ui/core";
 import React from "react";
-import BookmarkBorderIcon from "@material-ui/icons/BookmarkBorder";
 import { useState } from "react";
 import { useRouter } from "next/router";
 import { delelteUserPost } from "../redux/actions/dashboardActions";
@@ -60,7 +59,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const DashboardPostList = ({ post, delelteUserPost }) => {
+const DashboardPostList = ({ post, refreshData }) => {
   const classes = useStyles();
 
   const router = useRouter();
@@ -76,7 +75,8 @@ const DashboardPostList = ({ post, delelteUserPost }) => {
   };
 
   const onDelete = (urlId) => {
-    delelteUserPost(urlId);
+    delelteUserPost(urlId).then(() => refreshData());
+
     handleClose();
   };
 
@@ -185,4 +185,4 @@ const DashboardPostList = ({ post, delelteUserPost }) => {
   );
 };
 
-export default connect(null, { delelteUserPost })(DashboardPostList);
+export default DashboardPostList;

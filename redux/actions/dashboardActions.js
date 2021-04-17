@@ -26,10 +26,10 @@ export const fetchUserPostsOnServer = (cookie) => {
     .catch((err) => console.log(err));
 };
 
-export const delelteUserPost = (pid) => (dispatch) => {
-  server
+export const delelteUserPost = (pid) => {
+  return server
     .delete(`/post/${pid}`)
-    .then((res) => dispatch(fetchUserPosts()))
+    .then((res) => console.log("pp"))
     .catch((err) => console.log(err));
 };
 
