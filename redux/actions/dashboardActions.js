@@ -34,6 +34,7 @@ export const delelteUserPost = (pid) => {
 };
 
 export const createUserPost = (newArticle, router) => {
+  console.log(newArticle);
   server
     .post("/post", newArticle)
     .then((res) => {

@@ -84,7 +84,6 @@ const create = ({ data, action }) => {
           class: Marker,
           shortcut: "CMD+SHIFT+M",
         },
-        // data: article,
         image: {
           class: ImageTool,
           config: {
@@ -93,6 +92,7 @@ const create = ({ data, action }) => {
               byUrl: `${process.env.NEXT_PUBLIC_HOST}/api/upload/byUrl`, // Your endpoint that provides uploading by Url
             },
           },
+          inlineToolbar: true,
         },
 
         inlineCode: {
