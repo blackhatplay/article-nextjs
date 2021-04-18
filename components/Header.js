@@ -102,7 +102,7 @@ const Header = ({ isLoggedIn, user, handleDrawerToggle, drawer }) => {
   const toolbar = (
     <Toolbar>
       <Grid container justify="center" alignItems="center">
-        <Grid item>
+        <Grid item style={{ display: "flex" }}>
           {drawer ? (
             <IconButton
               color="inherit"
