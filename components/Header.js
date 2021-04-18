@@ -1,4 +1,5 @@
 import {
+  Button,
   Container,
   Grid,
   IconButton,
@@ -12,12 +13,10 @@ import AppBar from "@material-ui/core/AppBar";
 import { AccountCircle } from "@material-ui/icons";
 import MenuIcon from "@material-ui/icons/Menu";
 import Link from "next/link";
-import { connect } from "react-redux";
 import { useState } from "react";
 import { logout } from "../redux/actions/authActions";
 import useLocalStorage from "../utils/useLocalStorage";
 import { useRouter } from "next/router";
-import { destroyCookie } from "nookies";
 
 const drawerWidth = 300;
 
@@ -59,11 +58,17 @@ const useStyles = makeStyles((theme) => ({
   a: {
     color: "#fafafa",
     textDecoration: "none",
+    fontSize: "1rem",
   },
   menu: {
     "& .MuiMenu-paper": {
       background: "#2d2d39",
     },
+  },
+  button: {
+    background: "#1f1f29",
+    marginLeft: "1rem",
+    fontSize: "1rem",
   },
 }));
 
@@ -156,9 +161,21 @@ const Header = ({ isLoggedIn, user, handleDrawerToggle, drawer }) => {
                 </Menu>
               </div>
             ) : (
-              <Link href="/login" shallow>
-                <a className={classes.a}>Login</a>
-              </Link>
+              <>
+                <Link href="/login">
+                  <a className={classes.a}>Login</a>
+                </Link>
+                <Link href="/register" passHref>
+                  <Button
+                    className={classes.button}
+                    variant="contained"
+                    color="primary"
+                    disableElevation
+                  >
+                    Register now
+                  </Button>
+                </Link>
+              </>
             )}
           </Typography>
         </Grid>

@@ -1,4 +1,5 @@
 import {
+  Button,
   Card,
   CardContent,
   Grid,
@@ -7,7 +8,7 @@ import {
   Typography,
 } from "@material-ui/core";
 import React from "react";
-import BookmarkBorderIcon from "@material-ui/icons/BookmarkBorder";
+import Link from "next/link";
 
 const useStyles = makeStyles({
   root: {
@@ -18,9 +19,12 @@ const useStyles = makeStyles({
   title: {
     fontSize: 14,
   },
+  button: {
+    marginTop: "1rem",
+  },
 });
 
-const InfoCard = () => {
+const InfoCard = ({ title, body, icon, hrefText, href }) => {
   const classes = useStyles();
   return (
     <Card className={classes.root} variant="outlined">
@@ -28,17 +32,26 @@ const InfoCard = () => {
         <Grid container alignItems="center" spacing={1}>
           <Grid item>
             <Typography variant="h6" component="h2">
-              Bookmark stories for later
+              {title}
             </Typography>
           </Grid>
-          <Grid item>
-            <BookmarkBorderIcon />
-          </Grid>
+          {icon && <Grid item>{icon}</Grid>}
         </Grid>
         <Typography variant="body2" component="p">
-          Start saving stories by clicking the bookmark icon and you’ll find
-          them all here.
+          {body}
         </Typography>
+        {hrefText && (
+          <Link href={`${href}`} passHref>
+            <Button
+              className={classes.button}
+              variant="contained"
+              color="primary"
+              disableElevation
+            >
+              {hrefText}
+            </Button>
+          </Link>
+        )}
       </CardContent>
     </Card>
   );

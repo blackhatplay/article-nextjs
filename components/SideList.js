@@ -8,11 +8,15 @@ const useStyles = makeStyles((theme) => ({
     padding: "1rem 0",
   },
   sidePostListItem: {
-    cursor: "pointer",
+    // cursor: "pointer",
     marginBottom: "0.5rem",
     "& .img-wrapper img": {
       borderTopRightRadius: "5px",
       borderBottomLeftRadius: "5px",
+    },
+    "& a": {
+      textDecoration: "none",
+      color: "#fafafa",
     },
   },
 
@@ -55,21 +59,29 @@ const SideList = () => {
             className={classes.sidePostListItem}
             spacing={2}
             alignItems="center"
-            onClick={(e) => {
-              router.push(
-                "/being-unique-is-better-than-being-perfect-dd5oma6p4ar"
-              );
-            }}
+            // onClick={(e) => {
+            //   router.push(
+            //     "/being-unique-is-better-than-being-perfect-dd5oma6p4ar"
+            //   );
+            // }}
           >
             <Grid item md={5}>
-              <div className="img-wrapper">
-                <img src="https://source.unsplash.com/v9FQR4tbIq8/250x150" />
-              </div>
+              <Link href="/being-unique-is-better-than-being-perfect-dd5oma6p4ar">
+                <a>
+                  <div className="img-wrapper">
+                    <img src="https://source.unsplash.com/v9FQR4tbIq8/250x150" />
+                  </div>
+                </a>
+              </Link>
             </Grid>
             <Grid item md={7}>
-              <Typography variant="body1">
-                Lorem ipsum dolor, sit amet consectetur Nemo,
-              </Typography>
+              <Link href="/being-unique-is-better-than-being-perfect-dd5oma6p4ar">
+                <a>
+                  <Typography variant="body1">
+                    Lorem ipsum dolor, sit amet consectetur Nemo,
+                  </Typography>
+                </a>
+              </Link>
               <div className={classes.info}>
                 <Link href="/login">
                   <a className={classes.a} onClick={(e) => e.stopPropagation()}>

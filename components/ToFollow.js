@@ -3,6 +3,7 @@ import {
   Button,
   Card,
   CardContent,
+  Divider,
   Grid,
   IconButton,
   makeStyles,
@@ -25,7 +26,9 @@ const useStyles = makeStyles({
   },
   topicItem: {
     padding: "1rem 0",
-    borderBottom: "1px solid #252530",
+    "&:not(:last-child)": {
+      // borderBottom: "1px solid #252530",
+    },
   },
 });
 
@@ -64,6 +67,7 @@ const ToFollow = () => {
                 </Button>
               </Grid>
             </Grid>
+            <Divider />
             <Grid
               container
               justify="space-between"
@@ -85,6 +89,7 @@ const ToFollow = () => {
                 </Button>
               </Grid>
             </Grid>
+            <Divider />
             <Grid
               container
               justify="space-between"

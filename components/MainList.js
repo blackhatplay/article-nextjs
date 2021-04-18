@@ -29,13 +29,19 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "space-between",
   },
   postItem: {
-    cursor: "pointer",
+    // cursor: "pointer",
     margin: "1rem -8px",
     // borderBottom: "1px solid #212127b5",
     // background: "#2d2d38",
   },
   postItemWrapper: {
     margin: "1rem 0",
+    "& a": {
+      textDecoration: "none",
+    },
+    "& .MuiTypography-h6": {
+      color: "#fafafa",
+    },
   },
   title: {},
   body: {
@@ -56,26 +62,34 @@ const MainList = () => {
           spacing={2}
           alignItems="center"
           className={classes.postItem}
-          onClick={(e) => {
-            router.push(
-              "/being-unique-is-better-than-being-perfect-dd5oma6p4ar"
-            );
-          }}
+          // onClick={(e) => {
+          //   router.push(
+          //     "/being-unique-is-better-than-being-perfect-dd5oma6p4ar"
+          //   );
+          // }}
         >
           <Grid item md={4}>
-            <div>
-              <img src="https://source.unsplash.com/ICTKcvnXx_8/250x150" />
-            </div>
+            <Link href="/being-unique-is-better-than-being-perfect-dd5oma6p4ar">
+              <a>
+                <div>
+                  <img src="https://source.unsplash.com/ICTKcvnXx_8/250x150" />
+                </div>
+              </a>
+            </Link>
           </Grid>
           <Grid item md={8}>
-            <Typography variant="h6" className={classes.title}>
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-              Obcaecati aspernatur
-            </Typography>
-            <Typography variant="body2" className={classes.body}>
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Iste
-              nulla laboriosam veniam? Ducimus maxime exercitationem dolores
-            </Typography>
+            <Link href="/being-unique-is-better-than-being-perfect-dd5oma6p4ar">
+              <a>
+                <Typography variant="h6" className={classes.title}>
+                  Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+                  Obcaecati aspernatur
+                </Typography>
+                <Typography variant="body2" className={classes.body}>
+                  Lorem, ipsum dolor sit amet consectetur adipisicing elit. Iste
+                  nulla laboriosam veniam? Ducimus maxime exercitationem dolores
+                </Typography>
+              </a>
+            </Link>
             <div className={classes.info}>
               <Link href="/login">
                 <a className={classes.a} onClick={(e) => e.stopPropagation()}>
@@ -91,9 +105,11 @@ const MainList = () => {
             </div>
           </Grid>
         </Grid>
+
         <Grid
           container
           spacing={2}
+          alignItems="center"
           className={classes.postItem}
           onClick={(e) => {
             router.push(
@@ -110,6 +126,10 @@ const MainList = () => {
             <Typography variant="h6">
               Lorem ipsum dolor, sit amet consectetur adipisicing elit.
               Obcaecati aspernatur placeat
+            </Typography>
+            <Typography variant="body2" className={classes.body}>
+              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Iste
+              nulla laboriosam veniam? Ducimus maxime exercitationem dolores
             </Typography>
             <div className={classes.info}>
               <Link href="/login">
@@ -130,6 +150,7 @@ const MainList = () => {
           container
           spacing={2}
           className={classes.postItem}
+          alignItems="center"
           onClick={(e) => {
             router.push(
               "/being-unique-is-better-than-being-perfect-dd5oma6p4ar"
@@ -145,6 +166,10 @@ const MainList = () => {
             <Typography variant="h6">
               Lorem ipsum dolor, sit amet consectetur adipisicing elit.
               Obcaecati aspernatur placeat
+            </Typography>
+            <Typography variant="body2" className={classes.body}>
+              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Iste
+              nulla laboriosam veniam? Ducimus maxime exercitationem dolores
             </Typography>
             <div className={classes.info}>
               <Link href="/login">

@@ -7,7 +7,8 @@ const useStyles = makeStyles((theme) => ({
   showcase: {
     cursor: "pointer",
     padding: "1rem 0",
-    "& .MuiTypography-body1": {
+    textDecoration: "none",
+    "& .MuiTypography-root": {
       color: "#ccc",
     },
   },
@@ -50,37 +51,39 @@ const Featured = () => {
   return (
     <>
       <Typography variant="h6">Featured Post</Typography>
-      <Box
-        onClick={(e) => {
-          router.push("/being-unique-is-better-than-being-perfect-dd5oma6p4ar");
-        }}
-        className={classes.showcase}
-      >
-        <div className={classes.featuredImg}>
-          <img src="https://source.unsplash.com/gySMaocSdqs/500x500"></img>
-        </div>
-        <div>
-          <Typography variant="h4">Storen Technologies</Typography>
-          <Typography variant="body1">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum
-            quas, obcaecati fuga incidunt dicta numquam, repellendus
-            perspiciatis soluta, rem atque debitis iusto. Magni perferendis.
-          </Typography>
-        </div>
-        <div className={classes.info}>
-          <Link href="/login">
-            <a className={classes.a} onClick={(e) => e.stopPropagation()}>
-              <Avatar
-                alt="Remy Sharp"
-                src="https://source.unsplash.com/rDEOVtE7vOs/250x150"
-                className={classes.small}
-              />
-              <span>Blackhat</span>
-            </a>
-          </Link>
-          <Typography variant="body2">20/02/2021</Typography>
-        </div>
-      </Box>
+      <Link href="/being-unique-is-better-than-being-perfect-dd5oma6p4ar">
+        <a
+          // onClick={(e) => {
+          //   router.push("/being-unique-is-better-than-being-perfect-dd5oma6p4ar");
+          // }}
+          className={classes.showcase}
+        >
+          <div className={classes.featuredImg}>
+            <img src="https://source.unsplash.com/gySMaocSdqs/500x500"></img>
+          </div>
+          <div>
+            <Typography variant="h4">Storen Technologies</Typography>
+            <Typography variant="body1">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum
+              quas, obcaecati fuga incidunt dicta numquam, repellendus
+              perspiciatis soluta, rem atque debitis iusto. Magni perferendis.
+            </Typography>
+          </div>
+        </a>
+      </Link>
+      <div className={classes.info}>
+        <Link href="/login">
+          <a className={classes.a} onClick={(e) => e.stopPropagation()}>
+            <Avatar
+              alt="Remy Sharp"
+              src="https://source.unsplash.com/rDEOVtE7vOs/250x150"
+              className={classes.small}
+            />
+            <span>Blackhat</span>
+          </a>
+        </Link>
+        <Typography variant="body2">20/02/2021</Typography>
+      </div>
     </>
   );
 };

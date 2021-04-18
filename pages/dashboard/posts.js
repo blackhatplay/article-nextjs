@@ -17,10 +17,11 @@ import {
 } from "@material-ui/core";
 import InfoCard from "../../components/InfoCard";
 import DashboardPostList from "../../components/DashboardPostList";
+import BookmarkBorderIcon from "@material-ui/icons/BookmarkBorder";
 
 const useStyles = makeStyles((theme) => ({
   sideBarList: {
-    padding: "1rem 0",
+    padding: "2rem 0",
   },
 }));
 
@@ -35,7 +36,6 @@ const posts = ({ isLoggedIn, userPosts, user }) => {
   // }, [isLoggedIn]);
 
   const refreshData = () => {
-    console.log("re");
     router.replace(router.asPath);
   };
 
@@ -46,19 +46,33 @@ const posts = ({ isLoggedIn, userPosts, user }) => {
           <Grid item md={8}>
             <Typography variant="h6">Your Published Posts</Typography>
             <Box>
-              {userPosts.map((post) => (
-                <DashboardPostList
-                  key={post.urlId}
-                  post={post}
-                  refreshData={refreshData}
+              {userPosts.length > 0 ? (
+                userPosts.map((post) => (
+                  <DashboardPostList
+                    key={post.urlId}
+                    post={post}
+                    refreshData={refreshData}
+                  />
+                ))
+              ) : (
+                <InfoCard
+                  title="No Post yet"
+                  body="You dont have any post at the moment. Create you first post right now!"
+                  hrefText="Write a Post"
+                  href="/dashboard/create"
                 />
-              ))}
+              )}
             </Box>
           </Grid>
           <Grid item lg={4}>
             <div>
               <Box className={classes.sideBarList}>
-                <InfoCard />
+                <InfoCard
+                  body=" Start saving stories by clicking the bookmark icon and you’ll find
+          them all here."
+                  title="Bookmark stories for later"
+                  icon={<BookmarkBorderIcon />}
+                />
               </Box>
             </div>
           </Grid>
@@ -82,6 +96,7 @@ export async function getServerSideProps(context) {
     const posts = await fetchUserPostsOnServer(cookie);
 
     const userPosts = await posts.data;
+
     return {
       props: {
         isLoggedIn: true,
@@ -92,11 +107,11 @@ export async function getServerSideProps(context) {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    isLoggedIn: state.user.isLoggedIn,
-    user: state.user,
-  };
-};
+// const mapStateToProps = (state) => {
+//   return {
+//     isLoggedIn: state.user.isLoggedIn,
+//     user: state.user,
+//   };
+// };
 
 export default posts;

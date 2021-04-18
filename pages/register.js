@@ -2,6 +2,7 @@ import {
   Box,
   Button,
   FormControl,
+  FormHelperText,
   IconButton,
   Input,
   InputAdornment,
@@ -9,10 +10,15 @@ import {
   makeStyles,
 } from "@material-ui/core";
 import { AccountCircle, Visibility, VisibilityOff } from "@material-ui/icons";
+import EmailIcon from "@material-ui/icons/Email";
 import React, { useState } from "react";
 import Header from "../components/Header";
 import Head from "next/head";
 import Link from "next/link";
+import customServerAuth from "../utils/customServerAuth";
+import registerValidate from "../validations/registerValidate";
+import { register as registerAction } from "../redux/actions/authActions";
+import { useRouter } from "next/router";
 
 const useStyles = makeStyles((theme) => ({
   margin: {
@@ -22,18 +28,20 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
   },
   wrapper: {
-    width: "100vw",
-    height: `calc(100vh - ${100}px)`,
+    marginTop: "10vh",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
   },
   formWrapper: {
-    maxWidth: "400px",
+    maxWidth: "500px",
     padding: "1rem 2rem",
     margin: "0 1rem",
     background: "#2d2d38",
     borderRadius: "5px",
+    "& .MuiFormHelperText-root": {
+      color: "#f44336",
+    },
   },
   button: {
     marginTop: "1rem",
@@ -42,6 +50,7 @@ const useStyles = makeStyles((theme) => ({
     color: "#ccc!important",
   },
   input: {
+    fontSize: "1.2rem!important",
     borderBottom: "1px solid #fafafa",
   },
   forgot: {
@@ -56,6 +65,7 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     justifyContent: "space-between",
     width: "100%",
+    fontSize: "1rem",
 
     "& a": {
       color: "#2D5DBA",
@@ -68,6 +78,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const register = () => {
+  const router = useRouter();
   const [values, setValues] = useState({
     firstname: "",
     lastname: "",
@@ -79,6 +90,8 @@ const register = () => {
     showPassword2: false,
   });
 
+  const [errors, setError] = useState({});
+
   const handleClickShowPassword = (prop) => {
     setValues({ ...values, [prop]: !values[prop] });
   };
@@ -89,6 +102,21 @@ const register = () => {
 
   const handleChange = (prop) => (event) => {
     setValues({ ...values, [prop]: event.target.value });
+  };
+
+  const onClick = (e) => {
+    e.preventDefault();
+    const { errors, isValid } = registerValidate(values);
+    setError(errors);
+    if (!isValid) {
+      return;
+    }
+    registerAction(values)
+      .then((res) => {
+        if (res.success) router.push("/confirmation");
+        console.log(res);
+      })
+      .catch((err) => setError(err));
   };
 
   const classes = useStyles();
@@ -113,12 +141,12 @@ const register = () => {
               value={values.firstname}
               onChange={handleChange("firstname")}
               className={classes.input}
-              endAdornment={
-                <InputAdornment position="start">
-                  <AccountCircle color="secondary" />
-                </InputAdornment>
-              }
             />
+            {errors.firstname && (
+              <FormHelperText id="component-error-text">
+                {errors.firstname}
+              </FormHelperText>
+            )}
           </FormControl>
           <FormControl className={`${classes.margin} ${classes.textField}`}>
             <InputLabel
@@ -133,12 +161,12 @@ const register = () => {
               value={values.lastname}
               onChange={handleChange("lastname")}
               className={classes.input}
-              endAdornment={
-                <InputAdornment position="start">
-                  <AccountCircle color="secondary" />
-                </InputAdornment>
-              }
             />
+            {errors.lsatname && (
+              <FormHelperText id="component-error-text">
+                {errors.lsatname}
+              </FormHelperText>
+            )}
           </FormControl>
           <FormControl className={`${classes.margin} ${classes.textField}`}>
             <InputLabel
@@ -160,6 +188,11 @@ const register = () => {
                 </InputAdornment>
               }
             />
+            {errors.username && (
+              <FormHelperText id="component-error-text">
+                {errors.username}
+              </FormHelperText>
+            )}
           </FormControl>
           <FormControl className={`${classes.margin} ${classes.textField}`}>
             <InputLabel
@@ -177,10 +210,15 @@ const register = () => {
               className={classes.input}
               endAdornment={
                 <InputAdornment position="start">
-                  <AccountCircle color="secondary" />
+                  <EmailIcon color="secondary" />
                 </InputAdornment>
               }
             />
+            {errors.email && (
+              <FormHelperText id="component-error-text">
+                {errors.email}
+              </FormHelperText>
+            )}
           </FormControl>
 
           <FormControl className={`${classes.margin} ${classes.textField}`}>
@@ -213,6 +251,11 @@ const register = () => {
                 </InputAdornment>
               }
             />
+            {errors.password && (
+              <FormHelperText id="component-error-text">
+                {errors.password}
+              </FormHelperText>
+            )}
           </FormControl>
 
           <FormControl className={`${classes.margin} ${classes.textField}`}>
@@ -244,6 +287,11 @@ const register = () => {
                 </InputAdornment>
               }
             />
+            {errors.password2 && (
+              <FormHelperText id="component-error-text">
+                {errors.password2}
+              </FormHelperText>
+            )}
           </FormControl>
           <Button
             fullWidth
@@ -251,6 +299,8 @@ const register = () => {
             color="secondary"
             disableElevation
             className={classes.button}
+            onClick={onClick}
+            type="submit"
           >
             Register
           </Button>
@@ -267,5 +317,24 @@ const register = () => {
     </>
   );
 };
+
+export async function getServerSideProps(context) {
+  const { auth, user } = customServerAuth(context, "/login");
+
+  if (!auth) {
+    return {
+      props: {
+        isLoggedIn: false,
+      },
+    };
+  } else {
+    return {
+      redirect: {
+        destination: "/dashboard",
+        permanent: false,
+      },
+    };
+  }
+}
 
 export default register;

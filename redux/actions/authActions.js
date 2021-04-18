@@ -37,6 +37,25 @@ export const login = async (data) => {
   }
 };
 
+export const register = async (data) => {
+  try {
+    const response = await server.post("/auth/register", {
+      firstname: data.firstname,
+      lastname: data.lastname,
+      username: data.username,
+      email: data.email,
+      password: data.password,
+      password2: data.password2,
+    });
+
+    const res = response.data;
+
+    return res;
+  } catch (err) {
+    throw err.response.data;
+  }
+};
+
 export const logout = (clear) => {
   clear("article-utoken");
   // setAuthToken();

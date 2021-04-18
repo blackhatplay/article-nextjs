@@ -19,7 +19,7 @@ const index = ({ isLoggedIn, user }) => {
         <Head>
           <title>Dashboard</title>
         </Head>
-        <h1>Dashboard</h1>
+        <h1 style={{ textAlign: "center" }}>Dashboard</h1>
       </div>
     </Layout>
   );

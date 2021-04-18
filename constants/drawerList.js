@@ -2,12 +2,18 @@ import CreateIcon from "@material-ui/icons/Create";
 import DescriptionIcon from "@material-ui/icons/Description";
 import BookmarkBorderIcon from "@material-ui/icons/BookmarkBorder";
 import SettingsIcon from "@material-ui/icons/Settings";
+import DashboardIcon from "@material-ui/icons/Dashboard";
 
 const drawerList = [
   {
     title: "Write a Post",
     href: "/create",
     icon: <CreateIcon color="secondary" />,
+  },
+  {
+    title: "Dashboard",
+    href: "/",
+    icon: <DashboardIcon color="secondary" />,
   },
   {
     title: "Posts",
