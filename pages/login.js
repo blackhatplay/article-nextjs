@@ -3,6 +3,7 @@ import {
   Button,
   Collapse,
   FormControl,
+  FormHelperText,
   IconButton,
   Input,
   InputAdornment,
@@ -53,6 +54,9 @@ const useStyles = makeStyles((theme) => {
       "& input:-webkit-autofill": {
         "-webkit-text-fill-color": "#fafafa !important",
       },
+      "& .MuiFormHelperText-root": {
+        color: "#f44336",
+      },
     },
     button: {
       margin: "1rem 0",
@@ -96,7 +100,7 @@ const login = ({ isLoggedIn, user }) => {
 
   const [open, setOpen] = useState(false);
 
-  const [error, setError] = useState({});
+  const [errors, setErrors] = useState({});
 
   const router = useRouter();
 
@@ -134,8 +138,8 @@ const login = ({ isLoggedIn, user }) => {
         router.push("/dashboard");
       })
       .catch((err) => {
+        setErrors(err);
         if (err.verified === false) {
-          setError(err);
           setOpen(true);
         }
       });
@@ -170,6 +174,11 @@ const login = ({ isLoggedIn, user }) => {
                   </InputAdornment>
                 }
               />
+              {errors.user && (
+                <FormHelperText id="component-error-text">
+                  {errors.user}
+                </FormHelperText>
+              )}
             </FormControl>
 
             <FormControl className={`${classes.margin} ${classes.textField}`}>
@@ -202,6 +211,11 @@ const login = ({ isLoggedIn, user }) => {
                   </InputAdornment>
                 }
               />
+              {errors.password && (
+                <FormHelperText id="component-error-text">
+                  {errors.password}
+                </FormHelperText>
+              )}
             </FormControl>
             <Button
               fullWidth
@@ -239,7 +253,7 @@ const login = ({ isLoggedIn, user }) => {
                 </IconButton>
               }
             >
-              {error.message}
+              {errors.message}
             </Alert>
           </Collapse>
         </Box>

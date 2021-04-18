@@ -64,7 +64,7 @@ const posts = ({ isLoggedIn, userPosts, user }) => {
               )}
             </Box>
           </Grid>
-          <Grid item lg={4}>
+          <Grid item md={4}>
             <div>
               <Box className={classes.sideBarList}>
                 <InfoCard
