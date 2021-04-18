@@ -57,6 +57,13 @@ const useStyles = makeStyles((theme) => ({
   modalAction: {
     margin: "0.5rem -0.5rem",
   },
+  title: {
+    overflow: "hidden",
+    textOverflow: "ellipsis",
+    display: "-webkit-box",
+    "-webkit-line-clamp": 1,
+    "-webkit-box-orient": "vertical",
+  },
 }));
 
 const DashboardPostList = ({ post, refreshData }) => {
@@ -86,7 +93,7 @@ const DashboardPostList = ({ post, refreshData }) => {
         <CardContent>
           <Grid container alignItems="center" spacing={1}>
             <Grid item md={12}>
-              <Typography variant="h6" noWrap component="h2">
+              <Typography variant="h6" component="h2" className={classes.title}>
                 {post.title}
               </Typography>
             </Grid>

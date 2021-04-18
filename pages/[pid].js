@@ -10,8 +10,6 @@ const Post = ({ data, isLoggedIn, user }) => {
   const router = useRouter();
   const pid = router.query.pid;
 
-  console.log(data);
-
   let content = null;
 
   if (Object.keys(data).length > 0) {

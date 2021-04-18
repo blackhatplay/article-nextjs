@@ -41,9 +41,9 @@ const posts = ({ isLoggedIn, userPosts, user }) => {
 
   return (
     <Layout user={user} isLoggedIn={isLoggedIn}>
-      <Container maxWidth="lg">
+      <Container maxWidth="lg" disableGutters>
         <Grid container spacing={5}>
-          <Grid item md={8}>
+          <Grid item lg={8}>
             <Typography variant="h6">Your Published Posts</Typography>
             <Box>
               {userPosts.length > 0 ? (
@@ -64,7 +64,7 @@ const posts = ({ isLoggedIn, userPosts, user }) => {
               )}
             </Box>
           </Grid>
-          <Grid item md={4}>
+          <Grid item lg={4}>
             <div>
               <Box className={classes.sideBarList}>
                 <InfoCard
