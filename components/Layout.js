@@ -78,8 +78,8 @@ const Layout = (props) => {
     setMobileOpen(!mobileOpen);
   };
 
-  const onLogoutClick = () => {
-    logout(clearToken);
+  const onLogoutClick = async () => {
+    await logout(clearToken);
     router.push("/login");
   };
 

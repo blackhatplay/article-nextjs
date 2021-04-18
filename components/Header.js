@@ -83,8 +83,8 @@ const Header = ({ isLoggedIn, user, handleDrawerToggle, drawer }) => {
     setAnchorEl(null);
   };
 
-  const onLogoutClick = () => {
-    logout(clearToken);
+  const onLogoutClick = async () => {
+    await logout(clearToken);
     router.push("/login");
     handleClose();
   };

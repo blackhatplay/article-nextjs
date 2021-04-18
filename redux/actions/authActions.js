@@ -43,12 +43,10 @@ export const logout = (clear) => {
   // destroyCookie(null, "articleUtoken", {
   //   path: "/",
   // });
-  server
+  return server
     .delete("/auth/clearCookie")
     .then((res) => {
-      // dispatch({
-      //   type: LOGOUT,
-      // });
+      return res;
     })
     .catch((err) => console.log(err));
 };
