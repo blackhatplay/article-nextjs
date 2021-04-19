@@ -2,7 +2,6 @@ import { useRouter } from "next/router";
 import server from "../api/server";
 import ArticleRenderer from "../components/ArticleRenderer";
 import Header from "../components/Header";
-// import Layout from "../components/Layout";
 // import customServerAuth from "../utils/customServerAuth";
 import useSWR from "swr";
 
