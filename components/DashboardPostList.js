@@ -89,23 +89,21 @@ const DashboardPostList = ({ post, refreshData }) => {
 
   return (
     <Card className={classes.root} variant="outlined">
-      <CardActionArea>
-        <CardContent>
-          <Grid container alignItems="center" spacing={1}>
-            <Grid item md={12}>
-              <Typography variant="h6" component="h2" className={classes.title}>
-                {post.title}
-              </Typography>
-            </Grid>
-            {/* <Grid item>
+      <CardContent>
+        <Grid container alignItems="center" spacing={1}>
+          <Grid item md={12}>
+            <Typography variant="h6" component="h2" className={classes.title}>
+              {post.title}
+            </Typography>
+          </Grid>
+          {/* <Grid item>
               <BookmarkBorderIcon />
             </Grid> */}
-          </Grid>
-          <Typography variant="body2" component="p">
-            {post.desc}
-          </Typography>
-        </CardContent>
-      </CardActionArea>
+        </Grid>
+        <Typography variant="body2" component="p">
+          {post.desc}
+        </Typography>
+      </CardContent>
       <CardActions className={classes.actions}>
         <Box>
           <Button
