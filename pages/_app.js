@@ -9,7 +9,6 @@ import jwt_decode from "jwt-decode";
 import { logout } from "../redux/actions/authActions";
 import { useDispatch } from "react-redux";
 import { LOGIN_SUCCESS } from "../redux/types";
-import setAuthToken from "../utils/setAuthToken";
 
 function MyApp({ Component, pageProps }) {
   useEffect(() => {
