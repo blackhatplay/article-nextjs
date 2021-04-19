@@ -31,7 +31,7 @@ function MyApp({ Component, pageProps }) {
       const decoded = jwt_decode(token);
       const currentTime = Date.now() / 1000;
       if (decoded.exp < currentTime) {
-        store.dispatch(logout(clearToken));
+        logout(clearToken);
         // window.location.href = "/login";
       } else {
         // setAuthToken(token);
