@@ -1,10 +1,9 @@
 import { useRouter } from "next/router";
-import { useState, useEffect } from "react";
 import server from "../api/server";
 import ArticleRenderer from "../components/ArticleRenderer";
 import Header from "../components/Header";
-import Layout from "../components/Layout";
-import customServerAuth from "../utils/customServerAuth";
+// import Layout from "../components/Layout";
+// import customServerAuth from "../utils/customServerAuth";
 import useSWR from "swr";
 
 const fetcher = async (pid) => {
