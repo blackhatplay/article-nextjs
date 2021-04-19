@@ -3,47 +3,62 @@ import React from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
-const useStyles = makeStyles((theme) => ({
-  showcase: {
-    cursor: "pointer",
-    padding: "1rem 0",
-    textDecoration: "none",
-    "& .MuiTypography-root": {
-      color: "#ccc",
-    },
-  },
-  featuredImg: {
-    "& img": {
-      maxHeight: "300px",
-      borderTopRightRadius: "10px",
-      borderBottomRightRadius: "10px",
-    },
-  },
-  a: {
-    color: "#ccc",
-    textDecoration: "none",
-    display: "flex",
-    gap: "0.5rem",
-    alignItems: "center",
-    "& span": {
-      color: "#fafafa",
-      "&:hover": {
+const useStyles = makeStyles((theme) => {
+  return {
+    showcase: {
+      cursor: "pointer",
+      padding: "1rem 0",
+      textDecoration: "none",
+      "& .MuiTypography-root": {
         color: "#ccc",
       },
+      "& .MuiTypography-h4": {
+        color: "#fafafa",
+      },
+      [theme.breakpoints.down("xs")]: {
+        "& img": {
+          height: "10rem!important",
+        },
+        "& h1": {
+          fontSize: "1.5rem",
+        },
+      },
     },
-  },
-  small: {
-    width: theme.spacing(4),
-    height: theme.spacing(4),
-  },
-  info: {
-    color: "#b9b9b9cc",
-    padding: "1rem 0",
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-  },
-}));
+    featuredImg: {
+      "& img": {
+        // maxHeight: "300px",
+        height: "18rem",
+        width: "100%",
+        borderTopRightRadius: "10px",
+        borderBottomRightRadius: "10px",
+      },
+    },
+    a: {
+      color: "#ccc",
+      textDecoration: "none",
+      display: "flex",
+      gap: "0.5rem",
+      alignItems: "center",
+      "& span": {
+        color: "#fafafa",
+        "&:hover": {
+          color: "#ccc",
+        },
+      },
+    },
+    small: {
+      width: theme.spacing(4),
+      height: theme.spacing(4),
+    },
+    info: {
+      color: "#b9b9b9cc",
+      padding: "1rem 0",
+      display: "flex",
+      justifyContent: "space-between",
+      alignItems: "center",
+    },
+  };
+});
 
 const Featured = () => {
   const classes = useStyles();
@@ -62,7 +77,9 @@ const Featured = () => {
             <img src="https://source.unsplash.com/gySMaocSdqs/500x500"></img>
           </div>
           <div>
-            <Typography variant="h4">Storen Technologies</Typography>
+            <Typography variant="h4" component="h1">
+              Storen Technologies
+            </Typography>
             <Typography variant="body1">
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum
               quas, obcaecati fuga incidunt dicta numquam, repellendus
