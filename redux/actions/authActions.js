@@ -69,3 +69,25 @@ export const logout = (clear) => {
     })
     .catch((err) => console.log(err));
 };
+
+export const sendResetLink = (email) => {
+  return server
+    .post("/auth/forgot-password", { email })
+    .then((res) => {
+      return res.data;
+    })
+    .catch((err) => {
+      throw err.response.data;
+    });
+};
+
+export const resetPassword = ({ password, password2, token }) => {
+  return server
+    .post(`/auth/reset-password/${token}`, { password, password2 })
+    .then((res) => {
+      return res.data;
+    })
+    .catch((err) => {
+      throw err.response.data;
+    });
+};
