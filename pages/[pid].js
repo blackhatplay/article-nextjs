@@ -18,7 +18,10 @@ const Post = ({ postData }) => {
   const router = useRouter();
   const pid = router.query.pid;
 
-  const { data, error } = useSWR("user", fetcher);
+  const { data, error } = useSWR("user", fetcher, {
+    shouldRetryOnError: false,
+    errorRetryCount: 2,
+  });
 
   let content = null;
 

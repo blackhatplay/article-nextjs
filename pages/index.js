@@ -56,14 +56,18 @@ const fetcher = async (user) => {
     .get(`${process.env.NEXT_PUBLIC_HOST}/api/auth/${user}`)
     .then((res) => {
       return res.data;
-    });
+    })
+    .catch((err) => console.log(err));
 };
 
 const index = () => {
   const classes = useStyles();
   const router = useRouter();
 
-  const { data, error } = useSWR("user", fetcher);
+  const { data, error } = useSWR("user", fetcher, {
+    shouldRetryOnError: false,
+    errorRetryCount: 2,
+  });
 
   if (data && !error) {
     return (
