@@ -7,11 +7,9 @@ import useSWR from "swr";
 import isEmpty from "../validations/isEmpty";
 
 const fetcher = async (user) => {
-  return await server
-    .get(`${process.env.NEXT_PUBLIC_HOST}/api/auth/${user}`)
-    .then((res) => {
-      return res.data;
-    });
+  return await server.get(`/api/auth/${user}`).then((res) => {
+    return res.data;
+  });
 };
 
 const Post = ({ postData }) => {

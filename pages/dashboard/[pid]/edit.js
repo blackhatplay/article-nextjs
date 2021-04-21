@@ -17,7 +17,7 @@ const edit = ({ isLoggedIn, user }) => {
 
   useEffect(() => {
     server
-      .get(`/post/${router.query.pid}`)
+      .get(`/api/post/${router.query.pid}`)
       .then((res) => setState(res.data))
       .catch((err) => console.log(err));
   }, []);

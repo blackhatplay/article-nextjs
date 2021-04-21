@@ -53,7 +53,7 @@ const useStyles = makeStyles((theme) => ({
 
 const fetcher = async (user) => {
   return await server
-    .get(`${process.env.NEXT_PUBLIC_HOST}/api/auth/${user}`)
+    .get(`/api/auth/${user}`)
     .then((res) => {
       return res.data;
     })

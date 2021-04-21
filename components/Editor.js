@@ -113,7 +113,7 @@ const create = ({ data, action }) => {
       },
     });
 
-    server.get("/").then((res) => console.log(res.data));
+    server.get("/api").then((res) => console.log(res.data));
   }, []);
   return (
     <div className="container">

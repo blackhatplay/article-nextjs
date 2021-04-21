@@ -3,7 +3,7 @@ import { USER_POSTS } from "../types";
 
 export const fetchArticles = () => (dispatch) => {
   server
-    .get("http://localhost:4000/post/all")
+    .get("/api/post/all")
     .then((articles) => {
       dispatch({
         type: "all",

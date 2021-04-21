@@ -3,7 +3,7 @@ import { USER_POSTS } from "../types";
 
 export const fetchUserPosts = () => (dispatch) => {
   server
-    .get("/post/user")
+    .get("/api/post/user")
     .then((articles) => {
       dispatch({
         type: USER_POSTS,
@@ -28,7 +28,7 @@ export const fetchUserPostsOnServer = (cookie) => {
 
 export const delelteUserPost = (pid) => {
   return server
-    .delete(`/post/${pid}`)
+    .delete(`/api/post/${pid}`)
     .then((res) => console.log("pp"))
     .catch((err) => console.log(err));
 };
@@ -36,7 +36,7 @@ export const delelteUserPost = (pid) => {
 export const createUserPost = (newArticle, router) => {
   console.log(newArticle);
   server
-    .post("/post", newArticle)
+    .post("/api/post", newArticle)
     .then((res) => {
       router.push(`/${res.data.urlId}`);
     })
@@ -45,7 +45,7 @@ export const createUserPost = (newArticle, router) => {
 
 export const editUserPost = (article, router) => {
   server
-    .post("/post/edit", article)
+    .post("/api/post/edit", article)
     .then((res) => {
       router.push(`/${res.data.urlId}`);
     })

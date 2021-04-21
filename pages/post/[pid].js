@@ -10,7 +10,7 @@ const Post = ({ data }) => {
 
   if (!data) {
     useEffect(() => {
-      server.get(`/post/${query}`).then((res) => {
+      server.get(`/api/post/${query}`).then((res) => {
         if (Object.keys(res.data).length > 0) {
           setState(res.data);
         }
@@ -30,7 +30,7 @@ const Post = ({ data }) => {
 };
 
 export async function getServerSideProps(context) {
-  const res = await server.get(`/post/${context.query.pid}`);
+  const res = await server.get(`/api/post/${context.query.pid}`);
 
   const data = res.data;
   return {

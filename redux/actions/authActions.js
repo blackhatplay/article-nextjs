@@ -8,7 +8,7 @@ import { useStore } from "../store";
 
 export const login = async (data) => {
   try {
-    const response = await server.post("/auth/login", {
+    const response = await server.post("/api/auth/login", {
       user: data.user,
       password: data.password,
     });
@@ -41,7 +41,7 @@ export const login = async (data) => {
 
 export const register = async (data) => {
   try {
-    const response = await server.post("/auth/register", {
+    const response = await server.post("/api/auth/register", {
       firstname: data.firstname,
       lastname: data.lastname,
       username: data.username,
@@ -65,7 +65,7 @@ export const logout = (clear) => {
   //   path: "/",
   // });
   return server
-    .delete("/auth/clearCookie")
+    .delete("/api/auth/clearCookie")
     .then((res) => {
       return res;
     })
@@ -74,7 +74,7 @@ export const logout = (clear) => {
 
 export const sendResetLink = (email) => {
   return server
-    .post("/auth/forgot-password", { email })
+    .post("/api/auth/forgot-password", { email })
     .then((res) => {
       return res.data;
     })
@@ -85,7 +85,7 @@ export const sendResetLink = (email) => {
 
 export const resetPassword = ({ password, password2, token }) => {
   return server
-    .post(`/auth/reset-password/${token}`, { password, password2 })
+    .post(`/api/auth/reset-password/${token}`, { password, password2 })
     .then((res) => {
       return res.data;
     })
