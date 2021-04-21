@@ -88,8 +88,8 @@ const create = ({ data, action }) => {
           class: ImageTool,
           config: {
             endpoints: {
-              byFile: `${process.env.NEXT_PUBLIC_SERVER}/api/upload/byFile`, // Your backend file uploader endpoint
-              byUrl: `${process.env.NEXT_PUBLIC_SERVER}/api/upload/byUrl`, // Your endpoint that provides uploading by Url
+              byFile: `/api/upload/byFile`, // Your backend file uploader endpoint
+              byUrl: `/api/upload/byUrl`, // Your endpoint that provides uploading by Url
             },
           },
           inlineToolbar: true,
