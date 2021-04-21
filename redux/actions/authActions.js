@@ -4,6 +4,7 @@ import jwt_decode from "jwt-decode";
 import { LOGIN_SUCCESS, LOGOUT } from "../types";
 import { parseCookies, setCookie, destroyCookie } from "nookies";
 import setAuthToken from "../../utils/setAuthToken";
+import { useStore } from "../store";
 
 export const login = async (data) => {
   try {
@@ -24,7 +25,8 @@ export const login = async (data) => {
       //   path: "/",
       // });
       // setAuthToken(token);
-      // dispatch({
+      // const store = useStore();
+      // store.dispatch({
       //   type: LOGIN_SUCCESS,
       //   payload: decoded,
       // });

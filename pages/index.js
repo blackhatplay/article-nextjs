@@ -16,6 +16,9 @@ import SideList from "../components/SideList";
 import MainList from "../components/MainList";
 import SideBar from "../components/SideBar";
 import customServerAuth from "../utils/customServerAuth";
+import server from "../api/server";
+import useSWR from "swr";
+import isEmpty from "../validations/isEmpty";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -48,13 +51,57 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const index = ({ user, isLoggedIn }) => {
+const fetcher = async (user) => {
+  return await server
+    .get(`${process.env.NEXT_PUBLIC_HOST}/api/auth/${user}`)
+    .then((res) => {
+      return res.data;
+    });
+};
+
+const index = () => {
   const classes = useStyles();
   const router = useRouter();
 
+  const { data, error } = useSWR("user", fetcher);
+
+  if (data && !error) {
+    return (
+      <div>
+        <Header user={data} isLoggedIn={true} />
+        <Container
+          maxWidth="lg"
+          // spacing={5}
+          className={classes.root}
+          justify="center"
+        >
+          <Grid container spacing={1} className={classes.gridContainer}>
+            <Grid item lg={7}>
+              <Featured />
+            </Grid>
+            <Grid item className={classes.vlWrapper}>
+              <div className={classes.vl}></div>
+            </Grid>
+            <SideList />
+          </Grid>
+
+          <Grid container spacing={1}>
+            <Grid item lg={7}>
+              <MainList />
+            </Grid>
+            <Grid item className={classes.vlWrapper}>
+              <div className={classes.vl}></div>
+            </Grid>
+            <SideBar />
+          </Grid>
+        </Container>
+      </div>
+    );
+  }
+
   return (
     <div>
-      <Header user={user} isLoggedIn={isLoggedIn} />
+      <Header />
       <Container
         maxWidth="lg"
         // spacing={5}
@@ -85,20 +132,20 @@ const index = ({ user, isLoggedIn }) => {
   );
 };
 
-export async function getServerSideProps(context) {
-  const { auth, user, cookie } = customServerAuth(context, "/login");
-  if (!auth) {
-    return {
-      props: {},
-    };
-  } else {
-    return {
-      props: {
-        isLoggedIn: true,
-        user,
-      },
-    };
-  }
-}
+// export async function getServerSideProps(context) {
+//   const { auth, user, cookie } = customServerAuth(context, "/login");
+//   if (!auth) {
+//     return {
+//       props: {},
+//     };
+//   } else {
+//     return {
+//       props: {
+//         isLoggedIn: true,
+//         user,
+//       },
+//     };
+//   }
+// }
 
 export default index;
