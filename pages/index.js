@@ -63,7 +63,7 @@ const index = ({ user, isLoggedIn }) => {
                 maxWidth='lg'
                 // spacing={5}
                 className={classes.root}
-                justify='center'
+                justifyContent='center'
             >
                 <Grid container spacing={1} className={classes.gridContainer}>
                     <Grid item lg={7}>
